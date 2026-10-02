@@ -2,7 +2,7 @@
 
 A browser-based sketch pad built with vanilla HTML, CSS, and JavaScript. Hover over the grid to draw with random colors that darken with each pass.
 
-**Live demo:** https://patelkrishas.github.io/<etch-a-sketch>/
+**Live demo:** https://patelkrishas.github.io/etch-a-sketch/
 
 ## Features
 - 16x16 grid generated entirely with JavaScript
