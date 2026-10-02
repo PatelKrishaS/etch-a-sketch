@@ -1,4 +1,5 @@
 const container = document.querySelector(".container");
+const btn = document.querySelector("#new-grid-btn");
 
 function createGrid(size){
     container.innerHTML = "";
@@ -17,18 +18,21 @@ container.addEventListener('mouseover', (event) => {
     if (!square.classList.contains("square")) return;
 
     let hits = Number(square.dataset.hits) || 0;
-    if (hits >= 10) return;               // already fully opaque
+    if (hits >= 10) return;
 
     if (hits === 0) {
-        square.style.backgroundColor = getRandomColor();   // color only on first hover
+        const { r, g, b } = getRandomRGB();
+        square.dataset.r = r;
+        square.dataset.g = g;
+        square.dataset.b = b;
     }
 
     hits++;
     square.dataset.hits = hits;
-    square.style.opacity = hits / 10;     // 0.1, 0.2 ... 1
+    square.style.backgroundColor =
+        `rgba(${square.dataset.r}, ${square.dataset.g}, ${square.dataset.b}, ${hits / 10})`;
 });
 
-const btn = document.querySelector("#new-grid-btn");
 
 btn.addEventListener('click', () => {
     const raw = prompt("Enter the number of squares per side (Max: 100): ");
@@ -45,12 +49,11 @@ btn.addEventListener('click', () => {
 
 createGrid(16);
 
-function getRandomColor(){
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-
-    let rgb = `rgb(${r}, ${g}, ${b})`;
-    return rgb;
+function getRandomRGB() {
+    return {
+        r: Math.floor(Math.random() * 256),
+        g: Math.floor(Math.random() * 256),
+        b: Math.floor(Math.random() * 256),
+    };
 }
 

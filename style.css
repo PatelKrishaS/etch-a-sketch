@@ -9,14 +9,14 @@
     flex-wrap: wrap;
     height: 640px;
     width: 640px;
-    border: 1px solid #333;
+    border: 1px solid #ddd;
     margin: 20px auto;
 }
 
 .square{
     /* flex: 0 0 calc(100% / 16); */
     aspect-ratio: 1;
-    border: 1px solid #333;
+    border: 1px solid #ddd;
 }
 
 #new-grid-btn {
