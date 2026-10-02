@@ -13,10 +13,20 @@ function createGrid(size){
 }
 
 container.addEventListener('mouseover', (event) => {
-    if(event.target.classList.contains("square")){
-        event.target.style.backgroundColor = 'black';
+    const square = event.target;
+    if (!square.classList.contains("square")) return;
+
+    let hits = Number(square.dataset.hits) || 0;
+    if (hits >= 10) return;               // already fully opaque
+
+    if (hits === 0) {
+        square.style.backgroundColor = getRandomColor();   // color only on first hover
     }
-})
+
+    hits++;
+    square.dataset.hits = hits;
+    square.style.opacity = hits / 10;     // 0.1, 0.2 ... 1
+});
 
 const btn = document.querySelector("#new-grid-btn");
 
@@ -34,4 +44,13 @@ btn.addEventListener('click', () => {
 });
 
 createGrid(16);
+
+function getRandomColor(){
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    let rgb = `rgb(${r}, ${g}, ${b})`;
+    return rgb;
+}
 
